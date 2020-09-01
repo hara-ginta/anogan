@@ -14,7 +14,7 @@ def denormalize(X):
 
 if __name__ == '__main__':
     batch_size = 16
-    epochs = 4000
+    epochs = 1000
     input_dim = 30
     g_optim = Adam(lr=0.0001, beta_1=0.5, beta_2=0.9)
     d_optim = Adam(lr=0.0001, beta_1=0.5, beta_2=0.9)
