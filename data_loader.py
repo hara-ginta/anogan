@@ -2,6 +2,8 @@ import cv2
 from pathlib import Path
 import numpy as np
 from sklearn.model_selection import train_test_split
+import test_pic_to_num
+import train_pic_to_num
 
 def load_image_and_label(pickled_files):
     # Each file contains 495 images
@@ -11,6 +13,7 @@ def load_image_and_label(pickled_files):
     COL = 32
     DIM = 3
     whole_images = np.empty((IMAGE_COUNT_PER_FILE*len(pickled_files), ROW, COL, DIM))
+    print(len(pickled_files))
     whole_labels = np.empty(IMAGE_COUNT_PER_FILE*len(pickled_files))
     for i, pickled_file in enumerate(pickled_files):
         dict = _unpickle(pickled_file)
@@ -28,14 +31,20 @@ def _unpickle(pickled_file):
         dict = pickle.load(file, encoding='latin1')
     return dict
 
+#print(load_image_and_label('Train/data_batch_1'))
+
 # Function to load cucumber-9 dataset and split it into training and test data
 def load_cucumber():
-    (X1, y1) = load_image_and_label(['Train/data_batch_1',
-                                     'Train/data_batch_2',
-                                     'Train/data_batch_3',
-                                     'Train/data_batch_4',
-                                     'Train/data_batch_5'])
-    (X2, y2) = load_image_and_label(['Test/test_batch'])
+    #(X1, y1) = load_image_and_label(['Train/data_batch_1',
+    #                                 'Train/data_batch_2',
+    #                                 'Train/data_batch_3',
+    #                                 'Train/data_batch_4',
+    #                                 'Train/data_batch_5'])
+    #(X2, y2) = load_image_and_label(['Test/test_batch'])
+    X1 = train_pic_to_num.X 
+    Y1 = train_pic_to_num.Y
+    X2 = test_pic_to_num.X
+    Y2 = test_pic_to_num.Y
     X = np.concatenate((X1, X2), axis=0)
     y = np.concatenate((y1, y2), axis=0)
     # 2L as normal
